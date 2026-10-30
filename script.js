@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "name": "🍬 SUGAR ROCKET 🚀",
                         "farm": "DOJA PAK 🗽",
                         "type": "CALI TOPSHELF",
-                        "image": "ProductSR.png",
+                        "image": "ProductSR.jpg",
                         "video": "VideoSR.mov",
                         "description": `🏆 CALI TOPSHELF`,
                         "tarifs": [
@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const contactLinks = [
     {name:'Telegram', url:'https://t.me/+Gbbmzh-zZ4IyZDc0', cls:'telegram', icon:'✈'},
-    {name:'Instagram', url:'https://www.instagram.com/back_packstash?igsh=NDRhZjA2MzJrbWh0',cls:'instagram',icon:'◎'}
+    {name:'Instagram', url:'https://www.instagram.com/back_packstash?igsh=NDRhZjA2MzJrbWh0',cls:'instagram',icon:'◎'},
+    {name:'ShowRoom Instagram', url:'https://www.instagram.com/showroom.backpack?psln=MXdjM2dpYzAzM2Y5aQ==',cls:'instagram',icon:'◎'}
   ];
   // Codes d'origine conservés ; seuls les articles promoEligible en bénéficient.
   const validPromoCodes = {
