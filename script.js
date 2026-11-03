@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
   const farms = [
    {
-      id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoReel.png',
+      id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoBackTransparent.png',
       tag:'BACKPACK FARM', description:'Notre selection backpack.',
       glow:'#5d2325', products:[
         {
