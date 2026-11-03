@@ -14,6 +14,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const safe = text => String(text ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const $ = id => document.getElementById(id);
   const farms = [
+    {
+      id:'burningRope', name:'BURNING ROPE 🏜️🇺🇸', image:'Burning.png',
+      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
+      glow:'#5d4d23', products:[
+         {
+                        "id": "🥭 SMOOTHIE 🥤",
+                        "name": "🥭 SMOOTHIE 🥤",
+                        "farm": "BURNING ROPE 🏜️🇺🇸",
+                        "type": "CALI TOPSHELF",
+                        "image": "ProductSM.jpg",
+                        "video": "VideoSM.mov",
+                        "description": `🏆 CALI TOPSHELF`,
+                        "tarifs": [
+                            { weight: "1 JAR (3.5G)", price: 120 },
+                            { weight: "2 JAR (7G)", price: 220 },
+                            { weight: "3 JAR (10.5G)", price: 300 },
+                        ]
+                    },
+         {
+                        "id": "🤰BABY YODA 🪖",
+                        "name": "🤰BABY YODA 🪖",
+                        "farm": "BURNING ROPE 🏜️🇺🇸",
+                        "type": "CALI TOPSHELF",
+                        "image": "ProductBY.jpg",
+                        "video": "VideoBY.mov",
+                        "description": `🏆 CALI TOPSHELF`,
+                        "tarifs": [
+                            { weight: "1 JAR (3.5G)", price: 120 },
+                            { weight: "2 JAR (7G)", price: 220 },
+                            { weight: "3 JAR (10.5G)", price: 300 },
+                        ]
+                    },
+      ]
+    },
    {
       id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoBackTransparent.png',
       tag:'BACKPACK FARM', description:'Notre selection backpack.',
@@ -91,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
    {
       id:'doja-pak', name:'DOJA PAK 🇺🇸', image:'DojaPak.png',
-      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
+      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
          {
                         "id": "SUGAR ROCKET",
@@ -111,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'hightower', name:'HIGHTOWER 🇺🇸', image:'HighTower.png',
-      tag:'FARM 02 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
+      tag:'FARM 03 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
       glow:'#4c536a', products:[
           {
                         "id": "WHITE CHERRY ICE",
@@ -130,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'popey-static-grower', name:'POPEY STATIC GROWER 🇺🇸', image:'PopeyStatic.png',
-      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
+      tag:'FARM 04 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
       glow:'#6b5121', products:[
            {
                         "id": "GMO X PAPAYA ",
@@ -159,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     BACKPACK10:{type:'fixed',value:10,appliesTo:'eligible',cumulative:false}
   };
   let activeFarm = null;
+  let activeType = null; // Seulement pour BACKPACK SÉLECTION
   let activeProduct = null;
   let cart = [];
   let appliedPromo = null;
@@ -195,21 +230,75 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="farm-card-bottom"><span>VOIR LA COLLECTION</span><span class="arrow-circle">↗</span></span>
       </button>`).join('');
   }
+  // Les noms des types sont lus DIRECTEMENT dans product.type :
+  // l'ajout d'un produit d'un nouveau type crée automatiquement sa catégorie.
+  const backpackFarmId = 'backPackSelect';
+  const normalizeType = product => String(product.type || 'AUTRES').trim() || 'AUTRES';
+  function typeIcon(type) {
+    const label = type.toUpperCase();
+    if (label.includes('WHOLE PLANT') || label.includes('FRESH FROZEN')) return '🧊';
+    if (label.includes('PLASMA')) return '⚡';
+    if (label.includes('FROZEN')) return '❄️';
+    if (label.includes('DRY')) return '🥁';
+    if (label.includes('STATIC')) return '🧤';
+    return '✦';
+  }
+
+  function renderFarmCollection() {
+    const farm = activeFarm;
+    if (!farm) return;
+    const container = $('product-list');
+    const isBackpack = farm.id === backpackFarmId;
+    const showingTypes = isBackpack && activeType === null;
+    const nav = $('farm-type-nav');
+    nav.hidden = !isBackpack || showingTypes;
+    $('farm-type-indicator').textContent = isBackpack && activeType ? activeType : '';
+    $('farm-section-eyebrow').textContent = showingTypes ? 'BACKPACK / COLLECTIONS' : 'LA COLLECTION';
+    $('farm-section-title').innerHTML = showingTypes ? 'CHOISIS TON <strong>TYPE.</strong>' : 'LA <strong>SÉLECTION.</strong>';
+    const hint = $('farm-section-hint');
+    hint.hidden = !showingTypes;
+    hint.textContent = showingTypes ? 'Sélectionne un type pour découvrir ses produits.' : '';
+
+    if (showingTypes && farm.products.length) {
+      const types = [...new Set(farm.products.map(normalizeType))];
+      container.className = 'type-grid';
+      container.innerHTML = types.map((type, index) => {
+        const count = farm.products.filter(p => normalizeType(p) === type).length;
+        return `<button type="button" class="type-card" data-product-type="${safe(type)}" aria-label="Voir les produits ${safe(type)}">
+            <span class="type-card-mark" aria-hidden="true">${typeIcon(type)}</span>
+            <span class="type-card-copy">
+              <span class="type-card-kicker">BACKPACK • COLLECTION ${String(index + 1).padStart(2,'0')}</span>
+              <span class="type-card-name">${safe(type)}</span>
+              <span class="type-card-bottom">${count} produit${count > 1 ? 's' : ''} disponible${count > 1 ? 's' : ''}</span>
+            </span><span class="type-card-arrow" aria-hidden="true">↗</span>
+          </button>`;
+      }).join('');
+      return;
+    }
+
+    container.className = 'product-grid-inner';
+    const products = isBackpack && activeType !== null
+      ? farm.products.filter(product => normalizeType(product) === activeType)
+      : farm.products;
+
+    if (!products.length) {
+      container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">✦</div><span class="line-tag">COLLECTION</span><h3>La sélection arrive bientôt.</h3><p>Aucune référence n'est encore publiée pour cette collection. Les produits s'afficheront ici dès qu'ils auront été ajoutés à <code>script.js</code>.</p><button type="button" class="btn btn-quiet" id="empty-back">← Voir les autres farms</button></div>`;
+      return;
+    }
+    container.innerHTML = products.map(product => {
+      const first = product.tarifs?.[0];
+      return `<button class="product-card" data-product-id="${safe(product.id)}"><img src="${safe(product.image || 'LogoReel.png')}" alt="${safe(product.name)}" loading="lazy"><div class="product-card-info"><h3>${safe(product.name)}</h3><p>${safe(isBackpack ? normalizeType(product) : farm.name)}</p><strong>${first ? 'Dès '+money(first.price) : 'Découvrir'}</strong></div></button>`;
+    }).join('');
+  }
+
   function openFarm(id) {
     activeFarm = farms.find(farm => farm.id === id);
     if (!activeFarm) return;
+    activeType = null; // Retour sur les types à chaque ouverture de Backpack.
     const farm = activeFarm;
     $('farm-feature').style.setProperty('--farm-glow', farm.glow);
     $('farm-feature').innerHTML = `<img src="${safe(farm.image)}" alt="Logo ${safe(farm.name)}"><div><span class="eyebrow">${safe(farm.tag)}</span><h1>${safe(farm.name)}</h1><p>${safe(farm.description)}</p></div>`;
-    const container = $('product-list');
-    if (!farm.products.length) {
-      container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">✦</div><span class="line-tag">COLLECTION</span><h3>La sélection arrive bientôt.</h3><p>Aucune référence n'est encore publiée pour cette farm. Les produits s'afficheront ici dès qu'ils auront été ajoutés à <code>script.js</code>.</p><button type="button" class="btn btn-quiet" id="empty-back">← Voir les autres farms</button></div>`;
-    } else {
-      container.innerHTML = farm.products.map(product => {
-        const first = product.tarifs?.[0];
-        return `<button class="product-card" data-product-id="${safe(product.id)}"><img src="${safe(product.image || 'LogoReel.png')}" alt="${safe(product.name)}" loading="lazy"><div class="product-card-info"><h3>${safe(product.name)}</h3><p>${safe(farm.name)}</p><strong>${first ? 'Dès '+money(first.price) : 'Découvrir'}</strong></div></button>`;
-      }).join('');
-    }
+    renderFarmCollection();
     navigate('page-farm');
   }
   function openProduct(id) {
@@ -323,8 +412,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closest('#go-farms')){document.getElementById('farms-section')?.scrollIntoView({behavior:'smooth',block:'start'});return;}
     if(closest('#home-cart-button')){cartPage();return;}
     const farmCard=closest('[data-farm-id]');if(farmCard){openFarm(farmCard.dataset.farmId);return;}
+    const typeCard=closest('[data-product-type]');
+    if(typeCard && activeFarm?.id===backpackFarmId){
+      activeType=typeCard.dataset.productType;
+      renderFarmCollection();
+      $('farm-collection-section')?.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+    if(closest('#back-to-types') && activeFarm?.id===backpackFarmId){
+      activeType=null;
+      renderFarmCollection();
+      $('farm-collection-section')?.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
     const productCard=closest('[data-product-id]');if(productCard){openProduct(productCard.dataset.productId);return;}
-    if(closest('#back-to-products')){if(activeFarm)openFarm(activeFarm.id);else navigate('page-home');return;}
+    if(closest('#back-to-products')){if(activeFarm){renderFarmCollection();navigate('page-farm');}else navigate('page-home');return;}
     const addBtn=closest('[data-add-id]');if(addBtn){addToCart(addBtn.dataset.addId,addBtn.dataset.addWeight);return;}
     const qtyBtn=closest('[data-qty]');if(qtyBtn){const item=cart.find(row=>row.key===qtyBtn.dataset.key);if(item){item.quantity+=qtyBtn.dataset.qty==='plus'?1:-1;if(item.quantity<=0)cart=cart.filter(row=>row!==item);updateCartBadge();cartPage();}return;}
     if(closest('#checkout-button')){confirmationPage();return;}

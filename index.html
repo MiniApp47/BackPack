@@ -2276,6 +2276,117 @@
                 transition: none
             }
         }
+    
+        /* BACKPACK SÉLECTION — navigation par types de produits */
+        .farm-type-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+
+        .farm-type-nav[hidden], #farm-section-hint[hidden] { display: none !important; }
+
+        .farm-type-indicator {
+            color: #f0c6c8;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .03em;
+        }
+
+        #farm-collection-section { scroll-margin-top: 100px; }
+
+        #product-list.type-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 13px;
+        }
+
+        .type-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            min-height: 125px;
+            overflow: hidden;
+            padding: 17px 18px;
+            border: 1px solid #ad3b49;
+            border-radius: 19px;
+            color: #fff;
+            background: radial-gradient(circle at 9% 50%, #761a2b68, transparent 55%), linear-gradient(120deg, #321820, #171419 78%);
+            box-shadow: 0 8px 24px #0006, inset 0 1px 0 #ffffff13;
+            text-align: left;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .type-card:hover, .type-card:focus-visible {
+            border-color: #ff5967;
+            box-shadow: 0 12px 28px #0009, 0 0 22px #a31a2d42;
+            transform: translateY(-2px);
+        }
+
+        .type-card:active { transform: scale(.985); }
+
+        .type-card-mark {
+            flex: 0 0 72px;
+            height: 72px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            border: 1px solid #ff596742;
+            background: linear-gradient(145deg, #7d2231, #35151e);
+            font-size: 34px;
+            box-shadow: inset 0 1px 0 #ffffff26, 0 7px 16px #0005;
+        }
+
+        .type-card-copy { min-width: 0; flex: 1; }
+
+        .type-card-kicker {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 10px;
+            font-weight: 900;
+            color: #ffc7ce;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .type-card-name {
+            display: block;
+            font: 900 clamp(23px, 5.5vw, 32px)/.98 'Barlow Condensed', Impact, sans-serif;
+            overflow-wrap: anywhere;
+            text-transform: uppercase;
+        }
+
+        .type-card-bottom {
+            display: block;
+            margin-top: 9px;
+            color: #c8b0b7;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .type-card-arrow {
+            color: #ffacb5;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 700px) {
+            #product-list.type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .type-card { min-height: 145px; }
+        }
+
+        @media (max-width: 380px) {
+            .type-card { padding: 13px; gap: 11px; }
+            .type-card-mark { flex-basis: 56px; height: 62px; font-size: 27px; }
+            .type-card-name { font-size: 23px; }
+        }
+
     </style>
 </head>
 
@@ -2289,7 +2400,7 @@
             <div class="loader-brand">BACKPACK <span>&amp; STASH</span></div>
             <p class="loader-description">Chargement de la boutique...</p>
             <div class="loader-progress" aria-hidden="true"><span class="loader-progress-fill"></span></div>
-            <div class="loader-signature">3 FARMS · ONE BACKPACK</div>
+            <div class="loader-signature">4 FARMS · ONE BACKPACK</div>
         </div>
     </div>
 
@@ -2372,10 +2483,16 @@
             <div class="shell content-page"><button id="back-to-farms" class="back-chip">← &nbsp; Toutes les
                     farms</button>
                 <div id="farm-feature" class="farm-feature"></div>
-                <div class="section-head">
-                    <div><span class="line-tag">LA COLLECTION</span>
-                        <h2 class="section-title">LA <strong>SÉLECTION.</strong></h2>
+                <!-- Navigation par type : visible uniquement dans Backpack Sélection -->
+                <div id="farm-type-nav" class="farm-type-nav" hidden>
+                    <button type="button" id="back-to-types" class="back-chip">← &nbsp; Tous les types</button>
+                    <span id="farm-type-indicator" class="farm-type-indicator"></span>
+                </div>
+                <div class="section-head" id="farm-collection-section">
+                    <div><span id="farm-section-eyebrow" class="line-tag">LA COLLECTION</span>
+                        <h2 id="farm-section-title" class="section-title">LA <strong>SÉLECTION.</strong></h2>
                     </div>
+                    <p id="farm-section-hint" class="section-sub" hidden></p>
                 </div>
                 <div id="product-list" class="product-grid-inner"></div>
                 <div class="page-footer">BACKPACK <span>✦</span> STASH</div>
@@ -2502,7 +2619,7 @@
             aria-label="Fermer l'image">×</button><img class="modal-content" id="img-in-modal"
             alt="Avis en grand format"></div>
     <div id="notification-toast" role="status" aria-live="polite"></div>
-    <script src="script.js?v=6.2"></script>
+    <script src="script.js?v=6.3-types"></script>
 </body>
 
 </html>
