@@ -15,6 +15,81 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
   const farms = [
    {
+      id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoReel.png',
+      tag:'BACKPACK FARM', description:'Notre selection backpack.',
+      glow:'#5d2325', products:[
+        {
+                        "id": "🍇 FORBIDDEN JOY 🫐",
+                        "name": "🍇 FORBIDDEN JOY 🫐",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductFJ.png",
+                        "video": "VideoFJ.mp4",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1g", price: 70 },
+                            { weight: "2g", price: 130 },
+                        ]
+                    },
+        {
+                        "id": "🍓 STRAWBERRY X GMO 🧄",
+                        "name": "🍓 STRAWBERRY X GMO 🧄",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "STATIC-SIFT 🧤",
+                        "image": "ProductSG.png",
+                        "video": "VideoSG.mp4",
+                        "description": `STATIC-SIFT 🧤`,
+                        "tarifs": [
+                            { weight: "5g", price: 100 },
+                            { weight: "10g", price: 180 },
+                            { weight: "25g", price: 320 },
+                        ]
+                    },
+        {
+                        "id": "🍌 BANANA HONEY 🍯",
+                        "name": "🍌 BANANA HONEY 🍯",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "PLASMA-STATIC ⚡️",
+                        "image": "ProductBH.png",
+                        "video": "VideoBH.mp4",
+                        "description": `PLASMA-STATIC ⚡️`,
+                        "tarifs": [
+                            { weight: "5g", price: 80 },
+                            { weight: "10g", price: 160 },
+                            { weight: "25g", price: 300 },
+                        ]
+                    },
+         {
+                        "id": "🍊 ORANGE TANGIE 🥭",
+                        "name": "🍊 ORANGE TANGIE 🥭",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "DRY-SIFT 🥁",
+                        "image": "ProductOT.png",
+                        "video": "VideoOT.mp4",
+                        "description": `DRY-SIFT 🥁`,
+                        "tarifs": [
+                            { weight: "5g", price: 40 },
+                            { weight: "10g", price: 70 },
+                            { weight: "25g", price: 150 },
+                        ]
+                    },
+         {
+                        "id": "🧄 GARLIC JUICE🥤",
+                        "name": "🧄 GARLIC JUICE🥤",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "FROZEN-SIFT ❄️",
+                        "image": "ProductGJ.png",
+                        "video": "VideoGJ.mp4",
+                        "description": `FROZEN-SIFT ❄️`,
+                        "tarifs": [
+                            { weight: "5g", price: 70 },
+                            { weight: "10g", price: 130 },
+                            { weight: "25g", price: 250 },
+                        ]
+                    },
+      ]
+    },
+   {
       id:'doja-pak', name:'DOJA PAK', image:'DojaPak.png',
       tag:'FARM 01 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
