@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
    {
-      id:'doja-pak', name:'DOJA PAK', image:'DojaPak.png',
+      id:'doja-pak', name:'DOJA PAK 🇺🇸', image:'DojaPak.png',
       tag:'FARM 01 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
          {
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     {
-      id:'hightower', name:'HIGHTOWER', image:'HighTower.png',
+      id:'hightower', name:'HIGHTOWER 🇺🇸', image:'HighTower.png',
       tag:'FARM 02 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
       glow:'#4c536a', products:[
           {
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     {
-      id:'popey-static-grower', name:'POPEY STATIC GROWER', image:'PopeyStatic.png',
+      id:'popey-static-grower', name:'POPEY STATIC GROWER 🇺🇸', image:'PopeyStatic.png',
       tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
       glow:'#6b5121', products:[
            {
