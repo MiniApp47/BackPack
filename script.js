@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "tarifs": [
                             { weight: "5g", price: 100 },
                             { weight: "10g", price: 180 },
-                            { weight: "25g", price: 320 },
+                            { weight: "25g", price: 400 },
                         ]
                     },
         {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "tarifs": [
                             { weight: "5g", price: 80 },
                             { weight: "10g", price: 160 },
-                            { weight: "25g", price: 300 },
+                            { weight: "25g", price: 370 },
                         ]
                     },
          {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "tarifs": [
                             { weight: "5g", price: 70 },
                             { weight: "10g", price: 130 },
-                            { weight: "25g", price: 250 },
+                            { weight: "25g", price: 270 },
                         ]
                     },
       ]
