@@ -3,6 +3,7 @@
  * Pour ajouter les références d'une farm, remplir son tableau `products`.
  * Exemple de format (ne pas utiliser de fausses références) :
  * { id:'reference-unique', name:'Nom du produit', image:'Produit.jpg', video:'',
+ *   images:['Photo2.jpg', 'Photo3.jpg'], // Photos supplémentaires (facultatif)
  *   description:'Description', promoEligible:false,
  *   tarifs:[{weight:'5g', price:60}, {weight:'10g', price:110}] }
  */
@@ -15,8 +16,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
   const farms = [
     {
+      id:'FROSTY HASH x CALITÉ FARM', name:'FROSTYHASH X CALITÉ FARM ❄️🦍', image:'FarmFHC.png',
+      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Un mix de qualité. Découvre la sélection FROSTY HASH x CALITÉ FARM.',
+      glow:'#234c5d', products:[
+         {
+                        "id": "🦜 TROPICANA COOKIES 🍪",
+                        "name": "🦜 TROPICANA COOKIES 🍪",
+                        "farm": "FROSTYHASH X CALITÉ FARM ❄️🦍",
+                        "type": "LIVE ROSIN DRY-SIFT 🍯",
+                        "image": "ProductTC.jpg",
+                        "images": ["ProductTC2.jpg"], // Ajoute ici "ProductTC3.jpg", etc.
+                        "video": "",
+                        "description": `LIVE ROSIN DRY-SIFT 🍯`,
+                        "tarifs": [
+                            { weight: "2G", price: 250 },
+                            { weight: "4G", price: 480 },
+                        ]
+                    },
+      ]
+    },
+    {
       id:'burningRope', name:'BURNING ROPE 🏜️🇺🇸', image:'Burning.png',
-      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
+      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
       glow:'#5d4d23', products:[
          {
                         "id": "🥭 SMOOTHIE 🥤",
@@ -125,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
    {
       id:'doja-pak', name:'DOJA PAK 🇺🇸', image:'DojaPak.png',
-      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
+      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
          {
                         "id": "SUGAR ROCKET",
@@ -145,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'hightower', name:'HIGHTOWER 🇺🇸', image:'HighTower.png',
-      tag:'FARM 03 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
+      tag:'FARM 04 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
       glow:'#4c536a', products:[
           {
                         "id": "WHITE CHERRY ICE",
@@ -164,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'popey-static-grower', name:'POPEY STATIC GROWER 🇺🇸', image:'PopeyStatic.png',
-      tag:'FARM 04 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
+      tag:'FARM 05 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
       glow:'#6b5121', products:[
            {
                         "id": "GMO X PAPAYA ",
@@ -301,14 +322,91 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFarmCollection();
     navigate('page-farm');
   }
+  // Galerie d'images autonome : aucune modification à faire dans index.html.
+  // La propriété "image" reste la photo principale, "images" contient les suivantes.
+  const galleryCss = document.createElement('style');
+  galleryCss.id = 'backpack-product-gallery-css';
+  galleryCss.textContent = `
+    .bp-gallery{position:relative;width:100%;overflow:hidden;border-radius:18px;background:#09090b;border:1px solid #ffffff24}
+    .bp-gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none}
+    .bp-gallery-track::-webkit-scrollbar{display:none}
+    .bp-gallery-slide{flex:0 0 100%;min-width:0;aspect-ratio:1/1;scroll-snap-align:center;display:flex;align-items:center;justify-content:center}
+    .bp-gallery-slide img{width:100%;height:100%;max-height:490px;object-fit:contain;display:block;user-select:none;-webkit-user-drag:none}
+    .bp-gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:39px;height:42px;border-radius:12px;border:1px solid #ffffff65;background:#111116d9;color:#fff;font-size:28px;display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 14px #0007;line-height:1}
+    .bp-gallery-arrow.prev{left:10px}.bp-gallery-arrow.next{right:10px}
+    .bp-gallery-arrow:focus-visible,.bp-gallery-dot:focus-visible{outline:3px solid #ff9090;outline-offset:3px}
+    .bp-gallery-footer{display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 12px 12px;background:#17171b}
+    .bp-gallery-dots{display:flex;align-items:center;justify-content:center;gap:8px}
+    .bp-gallery-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#77727d;cursor:pointer;transition:background .2s,transform .2s}
+    .bp-gallery-dot.active{background:#f0222e;transform:scale(1.25)}
+    .bp-gallery-count{font-size:11px;font-weight:800;letter-spacing:.08em;color:#ded8dd;font-variant-numeric:tabular-nums}
+    @media (prefers-reduced-motion:reduce){.bp-gallery-track{scroll-behavior:auto}.bp-gallery-dot{transition:none}}
+  `;
+  document.head.appendChild(galleryCss);
+
+  function getProductImages(product) {
+    // On accepte les photos supplémentaires dans un tableau, sans doublons.
+    return [...new Set([product.image, ...(Array.isArray(product.images) ? product.images : [])]
+      .filter(path => typeof path === 'string' && path.trim()).map(path => path.trim()))];
+  }
+
+  function renderProductMedia(product) {
+    // Les vidéos des autres références restent inchangées.
+    if (product.video) {
+      return `<video controls playsinline preload="metadata" poster="${safe(product.image || 'LogoReel.png')}" src="${safe(product.video)}"></video>`;
+    }
+    const photos = getProductImages(product);
+    if (photos.length <= 1) {
+      return `<img class="product-image" src="${safe(photos[0] || 'LogoReel.png')}" alt="${safe(product.name)}">`;
+    }
+    return `<div class="bp-gallery" role="region" aria-label="Photos de ${safe(product.name)}">
+      <div class="bp-gallery-track" tabindex="0" aria-label="Faire défiler les photos">
+        ${photos.map((photo, i) => `<div class="bp-gallery-slide"><img src="${safe(photo)}" alt="${safe(product.name)} — photo ${i+1} sur ${photos.length}" loading="${i === 0 ? 'eager' : 'lazy'}" draggable="false"></div>`).join('')}
+      </div>
+      <button type="button" class="bp-gallery-arrow prev" data-gallery-move="-1" aria-label="Photo précédente">‹</button>
+      <button type="button" class="bp-gallery-arrow next" data-gallery-move="1" aria-label="Photo suivante">›</button>
+      <div class="bp-gallery-footer">
+        <div class="bp-gallery-dots">${photos.map((_, i) => `<button type="button" class="bp-gallery-dot${i === 0 ? ' active' : ''}" data-gallery-go="${i}" aria-label="Voir la photo ${i+1}" aria-pressed="${i === 0}"></button>`).join('')}</div>
+        <span class="bp-gallery-count" aria-live="polite">1 / ${photos.length}</span>
+      </div>
+    </div>`;
+  }
+
+  function setGalleryIndex(gallery, desiredIndex) {
+    if (!gallery) return;
+    const track = gallery.querySelector('.bp-gallery-track');
+    const count = gallery.querySelectorAll('.bp-gallery-slide').length;
+    if (!track || count < 2) return;
+    const currentIndex = Math.round(track.scrollLeft / (track.clientWidth || 1));
+    const index = Math.max(0, Math.min(count - 1, Number.isFinite(desiredIndex) ? desiredIndex : currentIndex));
+    track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+    syncGalleryIndicators(gallery, index);
+  }
+
+  function syncGalleryIndicators(gallery, index) {
+    const dots = gallery.querySelectorAll('.bp-gallery-dot');
+    dots.forEach((dot, i) => {
+      const active = i === index;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-pressed', String(active));
+    });
+    const counter = gallery.querySelector('.bp-gallery-count');
+    if (counter) counter.textContent = `${index + 1} / ${dots.length}`;
+  }
+
   function openProduct(id) {
     const product = findProduct(id);
     if (!product) return;
     activeProduct = product;
-    const media = product.video
-      ? `<video controls playsinline preload="metadata" poster="${safe(product.image || 'LogoReel.png')}" src="${safe(product.video)}"></video>`
-      : `<img class="product-image" src="${safe(product.image || 'LogoReel.png')}" alt="${safe(product.name)}">`;
+    const media = renderProductMedia(product);
     $('product-detail').innerHTML = `<div class="media-card">${media}</div><div class="panel" style="margin-top:15px"><div class="product-farm-name">${safe(activeFarm?.name || '')}</div><h1 class="product-name">${safe(product.name)}</h1>${product.description ? `<p class="product-description">${safe(product.description)}</p>` : ''}<div class="checkout-title">Tarifs disponibles</div>${(product.tarifs || []).map(t => `<div class="tarif-row"><span>${safe(t.weight)}</span><strong>${money(t.price)}</strong><button class="btn btn-red" data-add-id="${safe(product.id)}" data-add-weight="${safe(t.weight)}">+ Panier</button></div>`).join('') || `<p class="small-note">Tarifs à venir.</p>`}</div>`;
+    const gallery = $('product-detail').querySelector('.bp-gallery');
+    const track = gallery?.querySelector('.bp-gallery-track');
+    // Met à jour les points et le compteur après un glissement au doigt.
+    if (track) track.addEventListener('scroll', () => {
+      const index = Math.max(0, Math.min(track.children.length - 1, Math.round(track.scrollLeft / (track.clientWidth || 1))));
+      syncGalleryIndicators(gallery, index);
+    }, { passive:true });
     navigate('page-product');
   }
   function updateCartBadge() {
@@ -406,6 +504,20 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click',event=>{
     const t=event.target;
     const closest=sel=>t.closest(sel);
+    // Galerie produit : flèches + points (le swipe fonctionne aussi directement).
+    const galleryArrow = closest('[data-gallery-move]');
+    if (galleryArrow) {
+      const gallery = galleryArrow.closest('.bp-gallery');
+      const track = gallery?.querySelector('.bp-gallery-track');
+      const current = Math.round((track?.scrollLeft || 0) / (track?.clientWidth || 1));
+      setGalleryIndex(gallery, current + Number(galleryArrow.dataset.galleryMove));
+      return;
+    }
+    const galleryDot = closest('[data-gallery-go]');
+    if (galleryDot) {
+      setGalleryIndex(galleryDot.closest('.bp-gallery'), Number(galleryDot.dataset.galleryGo));
+      return;
+    }
     const pageBtn=closest('.nav-item');
     if(pageBtn){const page=pageBtn.dataset.page;if(page==='page-home')navigate('page-home');else navigate(page);return;}
     if(closest('#brand-home') || closest('#back-to-farms') || closest('#empty-back') || closest('#empty-cart-back') || closest('#cart-continue-shopping')){navigate('page-home');return;}
@@ -444,6 +556,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closest('#copy-order-btn')){copyText(formatOrderMessage());return;}
     const acc=closest('.accordion-header');if(acc){const row=acc.closest('.info-item');const open=!row.classList.contains('active');document.querySelectorAll('.info-item').forEach(el=>{el.classList.remove('active');el.querySelector('.accordion-header')?.setAttribute('aria-expanded','false');});row.classList.toggle('active',open);acc.setAttribute('aria-expanded',String(open));return;}
     if(closest('.close-modal') || closest('#image-modal') && !closest('#img-in-modal')){$('image-modal').classList.remove('show');$('image-modal').setAttribute('aria-hidden','true');return;}
+  });
+  document.addEventListener('keydown', event => {
+    if (!event.target.matches?.('.bp-gallery-track')) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const track = event.target;
+    const index = Math.round(track.scrollLeft / (track.clientWidth || 1));
+    setGalleryIndex(track.closest('.bp-gallery'), index + (event.key === 'ArrowRight' ? 1 : -1));
   });
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){$('image-modal').classList.remove('show');$('image-modal').setAttribute('aria-hidden','true');}});
   try {tg?.ready();tg?.expand();tg?.setHeaderColor('#1b0d12');tg?.setBackgroundColor('#100c0f');}catch(_){}
