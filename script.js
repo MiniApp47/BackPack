@@ -16,8 +16,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
   const farms = [
     {
+      id:'ICE MELT', name:'ICE MELT 🇪🇸', image:'FarmIce.png',
+      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Découvre la sélection ICE MELT 🇪🇸',
+      glow:'#23265d', products:[
+         {
+                        "id": "🍇 Ff x pineapple madness 🍍",
+                        "name": "🍇 Ff x pineapple madness 🍍",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductFP.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
+                    },
+         {
+                        "id": "🍔 Hash burger x ff 🍇",
+                        "name": "🍔 Hash burger x ff 🍇",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductHB.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
+                    },
+         {
+                        "id": "🚀 Super Boof Cherry 🍒",
+                        "name": "🚀 Super Boof Cherry 🍒",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductSBC.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
+                    },
+      ]
+    },
+    {
       id:'FROSTY HASH x CALITÉ FARM', name:'FROSTYHASH X CALITÉ FARM ❄️🦍', image:'FarmFHC.png',
-      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Un mix de qualité. Découvre la sélection FROSTY HASH x CALITÉ FARM.',
+      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Un mix de qualité. Découvre la sélection FROSTY HASH x CALITÉ FARM.',
       glow:'#234c5d', products:[
          {
                         "id": "🦜 TROPICANA COOKIES 🍪",
@@ -37,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'burningRope', name:'BURNING ROPE 🏜️🇺🇸', image:'Burning.png',
-      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
+      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
       glow:'#5d4d23', products:[
          {
                         "id": "🥭 SMOOTHIE 🥤",
@@ -146,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
    {
       id:'doja-pak', name:'DOJA PAK 🇺🇸', image:'DojaPak.png',
-      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
+      tag:'FARM 04 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
          {
                         "id": "SUGAR ROCKET",
@@ -166,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'hightower', name:'HIGHTOWER 🇺🇸', image:'HighTower.png',
-      tag:'FARM 04 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
+      tag:'FARM 05 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
       glow:'#4c536a', products:[
           {
                         "id": "WHITE CHERRY ICE",
@@ -185,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'popey-static-grower', name:'POPEY STATIC GROWER 🇺🇸', image:'PopeyStatic.png',
-      tag:'FARM 05 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
+      tag:'FARM 06 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
       glow:'#6b5121', products:[
            {
                         "id": "GMO X PAPAYA ",
