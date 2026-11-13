@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoBackTransparent.png',
       tag:'BACKPACK FARM', description:'Notre selection backpack.',
       glow:'#5d2325', products:[
-        {
+        /* {
                         "id": "🍇 FORBIDDEN JOY 🫐",
                         "name": "🍇 FORBIDDEN JOY 🫐",
                         "farm": "BACKPACK SÉLECTION 🎒",
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             { weight: "1g", price: 70 },
                             { weight: "2g", price: 130 },
                         ]
-                    },
+                    }, */
         {
                         "id": "🍓 STRAWBERRY X GMO 🧄",
                         "name": "🍓 STRAWBERRY X GMO 🧄",
