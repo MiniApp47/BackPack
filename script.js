@@ -15,109 +15,80 @@ document.addEventListener('DOMContentLoaded', () => {
   const safe = text => String(text ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const $ = id => document.getElementById(id);
   const farms = [
-    {
-      id:'ICE MELT', name:'ICE MELT 🇪🇸', image:'FarmIce.png',
-      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Découvre la sélection ICE MELT 🇪🇸',
-      glow:'#23265d', products:[
+     {
+      id:'CleanSift', name:'CLEAN SIFT OFFICIAL 🇪🇸', image:'FarmClean.png',
+      tag:'FARM 01 / EXCLUSIVE EDIT', description:'Decouvrez notre selection Clean Sift Officiel 🇪🇸',
+      glow:'#5d3c23', products:[
          {
-                        "id": "🍇 Ff x pineapple madness 🍍",
-                        "name": "🍇 Ff x pineapple madness 🍍",
-                        "farm": "ICE MELT 🇪🇸",
-                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
-                        "image": "ProductFP.jpg",
+                        "id": "🍑 BARBARA CHERRY 🍒",
+                        "name": "🍑 BARBARA CHERRY 🍒",
+                        "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
+                        "type": "PLASMA-STATIC ⚡️",
+                        "image": "ProductBC.jpg",
+                        "video": "VideoBC.mp4",
+                        "description": `PLASMA-STATIC ⚡️`,
+                        "tarifs": [
+                            { weight: "5g", price: 80 },
+                            { weight: "10g", price: 160 },
+                            { weight: "25g", price: 370 },
+                        ]
+                    },
+         {
+                        "id": "🍊 ORANGE RUNTZ 🍇",
+                        "name": "🍊 ORANGE RUNTZ 🍇",
+                        "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
+                        "type": "PLASMA-STATIC ⚡️",
+                        "image": "ProductOR.jpg",
                         "video": "",
-                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "description": `PLASMA-STATIC ⚡️`,
                         "tarifs": [
-                            { weight: "1G", price: 70 },
-                            { weight: "2G", price: 130 },
+                            { weight: "5g", price: 80 },
+                            { weight: "10g", price: 160 },
+                            { weight: "25g", price: 370 },
                         ]
                     },
-         {
-                        "id": "🍔 Hash burger x ff 🍇",
-                        "name": "🍔 Hash burger x ff 🍇",
-                        "farm": "ICE MELT 🇪🇸",
-                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
-                        "image": "ProductHB.jpg",
-                        "video": "",
-                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+        {
+                        "id": "🪻 LAVENDER 🪻",
+                        "name": "🪻 LAVENDER 🪻",
+                        "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
+                        "type": "STATIC-SIFT 🧤",
+                        "image": "ProductLV.jpg",
+                        "video": "VideoLV.mp4",
+                        "description": `STATIC-SIFT 🧤`,
                         "tarifs": [
-                            { weight: "1G", price: 70 },
-                            { weight: "2G", price: 130 },
+                            { weight: "5g", price: 100 },
+                            { weight: "10g", price: 180 },
+                            { weight: "25g", price: 400 },
                         ]
                     },
-         {
-                        "id": "🚀 Super Boof Cherry 🍒",
-                        "name": "🚀 Super Boof Cherry 🍒",
-                        "farm": "ICE MELT 🇪🇸",
-                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
-                        "image": "ProductSBC.jpg",
-                        "video": "",
-                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                    {
+                        "id": "🍊 ORANGE DIESEL ⛽️",
+                        "name": "🍊 ORANGE DIESEL ⛽️",
+                        "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
+                        "type": "FROZEN-SIFT 180/160/90u ❄️",
+                        "image": "ProductOD.jpg",
+                        "video": "VideoOD.mp4",
+                        "description": `FROZEN-SIFT 180/160/90u ❄️`,
                         "tarifs": [
-                            { weight: "1G", price: 70 },
-                            { weight: "2G", price: 130 },
+                            { weight: "5g", price: 70 },
+                            { weight: "10g", price: 130 },
+                            { weight: "25g", price: 270 },
                         ]
                     },
-      ]
-    },
-    {
-      id:'FROSTY HASH x CALITÉ FARM', name:'FROSTYHASH X CALITÉ FARM ❄️🦍', image:'FarmFHC.png',
-      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Un mix de qualité. Découvre la sélection FROSTY HASH x CALITÉ FARM.',
-      glow:'#234c5d', products:[
-         {
-                        "id": "🦜 TROPICANA COOKIES 🍪",
-                        "name": "🦜 TROPICANA COOKIES 🍪",
-                        "farm": "FROSTYHASH X CALITÉ FARM ❄️🦍",
-                        "type": "LIVE ROSIN DRY-SIFT 🍯",
-                        "image": "ProductTC.jpg",
-                        "images": ["ProductTC2.jpg"], // Ajoute ici "ProductTC3.jpg", etc.
-                        "video": "",
-                        "description": `LIVE ROSIN DRY-SIFT 🍯`,
+                     {
+                        "id": "🍊 RAMBOW MINTS 🥭",
+                        "name": "🍊 RAMBOW MINTS 🥭",
+                        "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
+                        "type": "DRY-SIFT 🥁",
+                        "image": "ProductRM.jpg",
+                        "video": "VideoRM.mp4",
+                        "description": `DRY-SIFT 🥁`,
                         "tarifs": [
-                            { weight: "2G", price: 250 },
-                            { weight: "4G", price: 480 },
+                            { weight: "5g", price: 40 },
+                            { weight: "10g", price: 70 },
+                            { weight: "25g", price: 150 },
                         ]
                     },
-      ]
-    },
-    {
-      id:'burningRope', name:'BURNING ROPE 🏜️🇺🇸', image:'Burning.png',
-      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
-      glow:'#5d4d23', products:[
-         {
-                        "id": "🥭 SMOOTHIE 🥤",
-                        "name": "🥭 SMOOTHIE 🥤",
-                        "farm": "BURNING ROPE 🏜️🇺🇸",
-                        "type": "CALI TOPSHELF",
-                        "image": "ProductSM.jpg",
-                        "video": "VideoSM.mov",
-                        "description": `🏆 CALI TOPSHELF`,
-                        "tarifs": [
-                            { weight: "1 JAR (3.5G)", price: 120 },
-                            { weight: "2 JAR (7G)", price: 220 },
-                            { weight: "3 JAR (10.5G)", price: 300 },
-                        ]
-                    },
-         {
-                        "id": "🤰BABY YODA 🪖",
-                        "name": "🤰BABY YODA 🪖",
-                        "farm": "BURNING ROPE 🏜️🇺🇸",
-                        "type": "CALI TOPSHELF",
-                        "image": "ProductBY.jpg",
-                        "video": "VideoBY.mov",
-                        "description": `🏆 CALI TOPSHELF`,
-                        "tarifs": [
-                            { weight: "1 JAR (3.5G)", price: 120 },
-                            { weight: "2 JAR (7G)", price: 220 },
-                            { weight: "3 JAR (10.5G)", price: 300 },
-                        ]
-                    },
-      ]
-    },
-   {
-      id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoBackTransparent.png',
-      tag:'BACKPACK FARM', description:'Notre selection backpack.',
-      glow:'#5d2325', products:[
         /* {
                         "id": "🍇 FORBIDDEN JOY 🫐",
                         "name": "🍇 FORBIDDEN JOY 🫐",
@@ -131,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             { weight: "2g", price: 130 },
                         ]
                     }, */
-        {
+        /* {
                         "id": "🍓 STRAWBERRY X GMO 🧄",
                         "name": "🍓 STRAWBERRY X GMO 🧄",
                         "farm": "BACKPACK SÉLECTION 🎒",
@@ -186,12 +157,186 @@ document.addEventListener('DOMContentLoaded', () => {
                             { weight: "10g", price: 130 },
                             { weight: "25g", price: 270 },
                         ]
+                    }, */
+      ]
+    },
+    {
+      id:'ICE MELT', name:'ICE MELT 🇪🇸', image:'FarmIce.png',
+      tag:'FARM 02 / EXCLUSIVE EDIT', description:'Découvre la sélection ICE MELT 🇪🇸',
+      glow:'#23265d', products:[
+         {
+                        "id": "🍇 Ff x pineapple madness 🍍",
+                        "name": "🍇 Ff x pineapple madness 🍍",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductFP.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
+                    },
+         {
+                        "id": "🍔 Hash burger x ff 🍇",
+                        "name": "🍔 Hash burger x ff 🍇",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductHB.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
+                    },
+         {
+                        "id": "🚀 Super Boof Cherry 🍒",
+                        "name": "🚀 Super Boof Cherry 🍒",
+                        "farm": "ICE MELT 🇪🇸",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductSBC.jpg",
+                        "video": "",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1G", price: 70 },
+                            { weight: "2G", price: 130 },
+                        ]
                     },
       ]
     },
+    {
+      id:'FROSTY HASH x CALITÉ FARM', name:'FROSTYHASH X CALITÉ FARM ❄️🦍', image:'FarmFHC.png',
+      tag:'FARM 03 / EXCLUSIVE EDIT', description:'Un mix de qualité. Découvre la sélection FROSTY HASH x CALITÉ FARM.',
+      glow:'#234c5d', products:[
+         {
+                        "id": "🦜 TROPICANA COOKIES 🍪",
+                        "name": "🦜 TROPICANA COOKIES 🍪",
+                        "farm": "FROSTYHASH X CALITÉ FARM ❄️🦍",
+                        "type": "LIVE ROSIN DRY-SIFT 🍯",
+                        "image": "ProductTC.jpg",
+                        "images": ["ProductTC2.jpg"], // Ajoute ici "ProductTC3.jpg", etc.
+                        "video": "",
+                        "description": `LIVE ROSIN DRY-SIFT 🍯`,
+                        "tarifs": [
+                            { weight: "2G", price: 250 },
+                            { weight: "4G", price: 480 },
+                        ]
+                    },
+      ]
+    },
+    {
+      id:'burningRope', name:'BURNING ROPE 🏜️🇺🇸', image:'Burning.png',
+      tag:'FARM 04 / EXCLUSIVE EDIT', description:'Une marque de folie. Découvre la sélection Burning Rope.',
+      glow:'#5d4d23', products:[
+         {
+                        "id": "🥭 SMOOTHIE 🥤",
+                        "name": "🥭 SMOOTHIE 🥤",
+                        "farm": "BURNING ROPE 🏜️🇺🇸",
+                        "type": "CALI TOPSHELF",
+                        "image": "ProductSM.jpg",
+                        "video": "VideoSM.mov",
+                        "description": `🏆 CALI TOPSHELF`,
+                        "tarifs": [
+                            { weight: "1 JAR (3.5G)", price: 120 },
+                            { weight: "2 JAR (7G)", price: 220 },
+                            { weight: "3 JAR (10.5G)", price: 300 },
+                        ]
+                    },
+         {
+                        "id": "🤰BABY YODA 🪖",
+                        "name": "🤰BABY YODA 🪖",
+                        "farm": "BURNING ROPE 🏜️🇺🇸",
+                        "type": "CALI TOPSHELF",
+                        "image": "ProductBY.jpg",
+                        "video": "VideoBY.mov",
+                        "description": `🏆 CALI TOPSHELF`,
+                        "tarifs": [
+                            { weight: "1 JAR (3.5G)", price: 120 },
+                            { weight: "2 JAR (7G)", price: 220 },
+                            { weight: "3 JAR (10.5G)", price: 300 },
+                        ]
+                    },
+      ]
+    },
+  /*  {
+      id:'backPackSelect', name:'BACKPACK SÉLECTION 🎒', image:'LogoBackTransparent.png',
+      tag:'BACKPACK FARM', description:'Notre selection backpack.',
+      glow:'#5d2325', products:[
+        /* {
+                        "id": "🍇 FORBIDDEN JOY 🫐",
+                        "name": "🍇 FORBIDDEN JOY 🫐",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "WHOLE PLANT FRESH FROZEN 🧊",
+                        "image": "ProductFJ.png",
+                        "video": "VideoFJ.mp4",
+                        "description": `WHOLE PLANT FRESH FROZEN 🧊`,
+                        "tarifs": [
+                            { weight: "1g", price: 70 },
+                            { weight: "2g", price: 130 },
+                        ]
+                    }, */
+        /* {
+                        "id": "🍓 STRAWBERRY X GMO 🧄",
+                        "name": "🍓 STRAWBERRY X GMO 🧄",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "STATIC-SIFT 🧤",
+                        "image": "ProductSG.png",
+                        "video": "VideoSG.mp4",
+                        "description": `STATIC-SIFT 🧤`,
+                        "tarifs": [
+                            { weight: "5g", price: 100 },
+                            { weight: "10g", price: 180 },
+                            { weight: "25g", price: 400 },
+                        ]
+                    },
+        {
+                        "id": "🍌 BANANA HONEY 🍯",
+                        "name": "🍌 BANANA HONEY 🍯",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "PLASMA-STATIC ⚡️",
+                        "image": "ProductBH.png",
+                        "video": "VideoBH.mp4",
+                        "description": `PLASMA-STATIC ⚡️`,
+                        "tarifs": [
+                            { weight: "5g", price: 80 },
+                            { weight: "10g", price: 160 },
+                            { weight: "25g", price: 370 },
+                        ]
+                    },
+         {
+                        "id": "🍊 ORANGE TANGIE 🥭",
+                        "name": "🍊 ORANGE TANGIE 🥭",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "DRY-SIFT 🥁",
+                        "image": "ProductOT.png",
+                        "video": "VideoOT.mp4",
+                        "description": `DRY-SIFT 🥁`,
+                        "tarifs": [
+                            { weight: "5g", price: 40 },
+                            { weight: "10g", price: 70 },
+                            { weight: "25g", price: 150 },
+                        ]
+                    },
+         {
+                        "id": "🧄 GARLIC JUICE🥤",
+                        "name": "🧄 GARLIC JUICE🥤",
+                        "farm": "BACKPACK SÉLECTION 🎒",
+                        "type": "FROZEN-SIFT ❄️",
+                        "image": "ProductGJ.png",
+                        "video": "VideoGJ.mp4",
+                        "description": `FROZEN-SIFT ❄️`,
+                        "tarifs": [
+                            { weight: "5g", price: 70 },
+                            { weight: "10g", price: 130 },
+                            { weight: "25g", price: 270 },
+                        ]
+                    }, 
+      ]
+    }, */
    {
       id:'doja-pak', name:'DOJA PAK 🇺🇸', image:'DojaPak.png',
-      tag:'FARM 04 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
+      tag:'FARM 05 / EXCLUSIVE EDIT', description:'Une identité unique. Découvre la sélection Doja Pak.',
       glow:'#5d2351', products:[
          {
                         "id": "SUGAR ROCKET",
@@ -211,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'hightower', name:'HIGHTOWER 🇺🇸', image:'HighTower.png',
-      tag:'FARM 05 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
+      tag:'FARM 06 / EXCLUSIVE EDIT', description:'L’univers Hightower et sa sélection.',
       glow:'#4c536a', products:[
           {
                         "id": "WHITE CHERRY ICE",
@@ -230,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id:'popey-static-grower', name:'POPEY STATIC GROWER 🇺🇸', image:'PopeyStatic.png',
-      tag:'FARM 06 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
+      tag:'FARM 07 / EXCLUSIVE EDIT', description:'Une ambiance à part. Découvre la sélection Popey.',
       glow:'#6b5121', products:[
            {
                         "id": "GMO X PAPAYA ",
@@ -259,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     BACKPACK10:{type:'fixed',value:10,appliesTo:'eligible',cumulative:false}
   };
   let activeFarm = null;
-  let activeType = null; // Seulement pour BACKPACK SÉLECTION
+  let activeType = null; // Pour les farms organisées par type (Clean Sift et Backpack).
   let activeProduct = null;
   let cart = [];
   let appliedPromo = null;
@@ -298,7 +443,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Les noms des types sont lus DIRECTEMENT dans product.type :
   // l'ajout d'un produit d'un nouveau type crée automatiquement sa catégorie.
-  const backpackFarmId = 'backPackSelect';
+  // Ajouter ici l'ID d'une farm pour lui activer la sélection par type.
+  const typedFarmLabels = {
+    'backPackSelect': 'BACKPACK',
+    'CleanSift': 'CLEAN SIFT'
+  };
+  const hasTypeSelection = farm => Boolean(farm && Object.prototype.hasOwnProperty.call(typedFarmLabels, farm.id));
   const normalizeType = product => String(product.type || 'AUTRES').trim() || 'AUTRES';
   function typeIcon(type) {
     const label = type.toUpperCase();
@@ -314,12 +464,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const farm = activeFarm;
     if (!farm) return;
     const container = $('product-list');
-    const isBackpack = farm.id === backpackFarmId;
-    const showingTypes = isBackpack && activeType === null;
+    const usesTypes = hasTypeSelection(farm);
+    const typeBrand = typedFarmLabels[farm.id] || '';
+    const showingTypes = usesTypes && activeType === null;
     const nav = $('farm-type-nav');
-    nav.hidden = !isBackpack || showingTypes;
-    $('farm-type-indicator').textContent = isBackpack && activeType ? activeType : '';
-    $('farm-section-eyebrow').textContent = showingTypes ? 'BACKPACK / COLLECTIONS' : 'LA COLLECTION';
+    nav.hidden = !usesTypes || showingTypes;
+    $('farm-type-indicator').textContent = usesTypes && activeType ? activeType : '';
+    $('farm-section-eyebrow').textContent = showingTypes ? `${typeBrand} / COLLECTIONS` : 'LA COLLECTION';
     $('farm-section-title').innerHTML = showingTypes ? 'CHOISIS TON <strong>TYPE.</strong>' : 'LA <strong>SÉLECTION.</strong>';
     const hint = $('farm-section-hint');
     hint.hidden = !showingTypes;
@@ -333,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<button type="button" class="type-card" data-product-type="${safe(type)}" aria-label="Voir les produits ${safe(type)}">
             <span class="type-card-mark" aria-hidden="true">${typeIcon(type)}</span>
             <span class="type-card-copy">
-              <span class="type-card-kicker">BACKPACK • COLLECTION ${String(index + 1).padStart(2,'0')}</span>
+              <span class="type-card-kicker">${safe(typeBrand)} • COLLECTION ${String(index + 1).padStart(2,'0')}</span>
               <span class="type-card-name">${safe(type)}</span>
               <span class="type-card-bottom">${count} produit${count > 1 ? 's' : ''} disponible${count > 1 ? 's' : ''}</span>
             </span><span class="type-card-arrow" aria-hidden="true">↗</span>
@@ -343,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     container.className = 'product-grid-inner';
-    const products = isBackpack && activeType !== null
+    const products = usesTypes && activeType !== null
       ? farm.products.filter(product => normalizeType(product) === activeType)
       : farm.products;
 
@@ -353,14 +504,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     container.innerHTML = products.map(product => {
       const first = product.tarifs?.[0];
-      return `<button class="product-card" data-product-id="${safe(product.id)}"><img src="${safe(product.image || 'LogoReel.png')}" alt="${safe(product.name)}" loading="lazy"><div class="product-card-info"><h3>${safe(product.name)}</h3><p>${safe(isBackpack ? normalizeType(product) : farm.name)}</p><strong>${first ? 'Dès '+money(first.price) : 'Découvrir'}</strong></div></button>`;
+      return `<button class="product-card" data-product-id="${safe(product.id)}"><img src="${safe(product.image || 'LogoReel.png')}" alt="${safe(product.name)}" loading="lazy"><div class="product-card-info"><h3>${safe(product.name)}</h3><p>${safe(usesTypes ? normalizeType(product) : farm.name)}</p><strong>${first ? 'Dès '+money(first.price) : 'Découvrir'}</strong></div></button>`;
     }).join('');
   }
 
   function openFarm(id) {
     activeFarm = farms.find(farm => farm.id === id);
     if (!activeFarm) return;
-    activeType = null; // Retour sur les types à chaque ouverture de Backpack.
+    activeType = null; // Afficher les types à chaque ouverture de Clean Sift ou Backpack.
     const farm = activeFarm;
     $('farm-feature').style.setProperty('--farm-glow', farm.glow);
     $('farm-feature').innerHTML = `<img src="${safe(farm.image)}" alt="Logo ${safe(farm.name)}"><div><span class="eyebrow">${safe(farm.tag)}</span><h1>${safe(farm.name)}</h1><p>${safe(farm.description)}</p></div>`;
@@ -570,13 +721,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closest('#home-cart-button')){cartPage();return;}
     const farmCard=closest('[data-farm-id]');if(farmCard){openFarm(farmCard.dataset.farmId);return;}
     const typeCard=closest('[data-product-type]');
-    if(typeCard && activeFarm?.id===backpackFarmId){
+    if(typeCard && hasTypeSelection(activeFarm)){
       activeType=typeCard.dataset.productType;
       renderFarmCollection();
       $('farm-collection-section')?.scrollIntoView({behavior:'smooth',block:'start'});
       return;
     }
-    if(closest('#back-to-types') && activeFarm?.id===backpackFarmId){
+    if(closest('#back-to-types') && hasTypeSelection(activeFarm)){
       activeType=null;
       renderFarmCollection();
       $('farm-collection-section')?.scrollIntoView({behavior:'smooth',block:'start'});
