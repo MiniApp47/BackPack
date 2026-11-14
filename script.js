@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         "farm": "CLEAN SIFT OFFICIAL 🇪🇸",
                         "type": "PLASMA-STATIC ⚡️",
                         "image": "ProductOR.jpg",
-                        "video": "",
+                        "video": "VideoBC.mp4",
                         "description": `PLASMA-STATIC ⚡️`,
                         "tarifs": [
                             { weight: "5g", price: 80 },
