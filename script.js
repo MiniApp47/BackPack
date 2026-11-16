@@ -10,9 +10,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
   const tg = window.Telegram?.WebApp || null;
-  // Contact de commande Potato (les liens sociaux Telegram sont conservés).
-  const ORDER_POTATO_USERNAME = 'BPCOMMANDE';
-  const ORDER_POTATO_URL = `https://potato.im/${ORDER_POTATO_USERNAME}`;
+  // Contact de commande TatoTalk (les liens sociaux Telegram sont conservés).
+  const ORDER_TATO_USERNAME = 'BPCOMMANDE';
+  const ORDER_TATO_URL = `https://tato.im/${ORDER_TATO_USERNAME}`;
   const money = value => `${Number(value || 0).toFixed(2).replace('.', ',')} €`;
   const safe = text => String(text ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const $ = id => document.getElementById(id);
@@ -676,12 +676,12 @@ document.addEventListener('DOMContentLoaded', () => {
       vibrate();notify('Récapitulatif copié ✓');
     } catch(_) {notify('Copie impossible sur cet appareil.');}
   }
-  function sendPotatoOrder() {
+  function sendTatoOrder() {
     if (!cart.length) { notify('Ton panier est vide.'); return; }
     const message = formatOrderMessage();
 
-    // Potato ne documente pas de lien qui préremplit un message chez un contact.
-    // On copie donc la commande AVANT d'ouvrir le profil Potato.
+    // TatoTalk : pas de paramètre officiel de préremplissage confirmé pour un profil.
+    // On copie donc la commande AVANT d'ouvrir le profil TatoTalk.
     // execCommand reste utile dans certaines WebViews mobiles, car il est synchrone.
     let copied = false;
     const textarea = document.createElement('textarea');
@@ -701,35 +701,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!copied && navigator.clipboard?.writeText) {
       try {
         navigator.clipboard.writeText(message)
-          .then(() => notify('Commande copiée ! Colle-la dans Potato puis envoie.'))
+          .then(() => notify('Commande copiée ! Colle-la dans TatoTalk puis envoie.'))
           .catch(() => notify('Copie bloquée : utilise « Copier le récapitulatif ».'));
       } catch (_) { notify('Utilise « Copier le récapitulatif ».'); }
     } else if (copied) {
-      notify('Commande copiée ! Colle-la dans Potato puis envoie.');
+      notify('Commande copiée ! Colle-la dans TatoTalk puis envoie.');
     } else {
       notify('Utilise « Copier le récapitulatif » si nécessaire.');
     }
 
-    // openLink ouvre un lien externe ; openTelegramLink ne convient pas à Potato.
+    // Lien web de profil TatoTalk ; ouverture externe depuis la Mini App Telegram.
+    // Si ce profil n’est pas accessible, rechercher @BPCOMMANDE dans TatoTalk.
     try {
-      if (tg?.openLink) tg.openLink(ORDER_POTATO_URL);
-      else window.location.href = ORDER_POTATO_URL;
+      if (tg?.openLink) tg.openLink(ORDER_TATO_URL);
+      else window.location.href = ORDER_TATO_URL;
     } catch (_) {
-      window.location.href = ORDER_POTATO_URL;
+      window.location.href = ORDER_TATO_URL;
     }
   }
 
   // Actualise les textes de la confirmation sans imposer de modifier index.html.
-  function setupPotatoCheckoutUI() {
+  function setupTatoCheckoutUI() {
     const button = $('confirm-order-button');
     if (!button) return;
-    button.innerHTML = '<svg style="width:18px;height:18px"><use href="#i-send"></use></svg> Copier et ouvrir Potato';
+    button.innerHTML = '<svg style="width:18px;height:18px"><use href="#i-send"></use></svg> Copier et ouvrir TatoTalk';
     const info = button.closest('.actions-stack')?.previousElementSibling;
     if (info?.classList.contains('small-note')) {
-      info.textContent = `Le récapitulatif sera copié, puis Potato ouvrira @${ORDER_POTATO_USERNAME}. Colle la commande dans la conversation et appuie sur Envoyer.`;
+      info.textContent = `Le récapitulatif sera copié, puis TatoTalk ouvrira @${ORDER_TATO_USERNAME}. Colle la commande dans la conversation et appuie sur Envoyer. Si le profil ne s’ouvre pas, recherche cet identifiant dans TatoTalk.`;
     }
     const intro = document.querySelector('#page-confirmation .page-heading p');
-    if (intro) intro.textContent = 'Vérifie les détails avant de copier ta commande vers Potato.';
+    if (intro) intro.textContent = 'Vérifie les détails avant de copier ta commande vers TatoTalk.';
   }
   function renderContact() {
     $('contact-links-container').innerHTML=contactLinks.map(link=>`<a class="social-link ${link.cls}" href="${safe(link.url)}" target="_blank" rel="noopener noreferrer"><span><span style="font-size:21px">${link.icon}</span>${safe(link.name)}</span><span>↗</span></a>`).join('');
@@ -794,7 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if(closest('#remove-promo-btn')){appliedPromo=null;confirmationPage();return;}
     const pay=closest('.payment-btn');if(pay){paymentMethod=pay.dataset.method;document.querySelectorAll('.payment-btn').forEach(b=>b.classList.toggle('active',b===pay));return;}
-    if(closest('#confirm-order-button')){sendPotatoOrder();return;}
+    if(closest('#confirm-order-button')){sendTatoOrder();return;}
     if(closest('#copy-order-btn')){copyText(formatOrderMessage());return;}
     const acc=closest('.accordion-header');if(acc){const row=acc.closest('.info-item');const open=!row.classList.contains('active');document.querySelectorAll('.info-item').forEach(el=>{el.classList.remove('active');el.querySelector('.accordion-header')?.setAttribute('aria-expanded','false');});row.classList.toggle('active',open);acc.setAttribute('aria-expanded',String(open));return;}
     if(closest('.close-modal') || closest('#image-modal') && !closest('#img-in-modal')){$('image-modal').classList.remove('show');$('image-modal').setAttribute('aria-hidden','true');return;}
@@ -809,7 +810,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){$('image-modal').classList.remove('show');$('image-modal').setAttribute('aria-hidden','true');}});
   try {tg?.ready();tg?.expand();tg?.setHeaderColor('#1b0d12');tg?.setBackgroundColor('#100c0f');}catch(_){}
-  setupPotatoCheckoutUI();
+  setupTatoCheckoutUI();
   renderFarms();renderContact();renderReviews();updateCartBadge();navigate('page-home');
   // Comme sur l'ancien bot : splash de chargement lors de chaque nouvelle ouverture.
   // On retire le loader uniquement une fois la boutique initialisée.
